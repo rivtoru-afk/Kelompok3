@@ -1,1 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Bantaeng Digital Map</title>
 
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Segoe UI', sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      background:
+        linear-gradient(rgba(10,20,10,0.55), rgba(10,20,10,0.7)),
+        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      overflow:hidden;
+      color:white;
+    }
+
+    .overlay{
+      position:absolute;
+      inset:0;
+      background:
+      radial-gradient(circle at top left, rgba(255,215,0,0.15), transparent 40%),
+      radial-gradient(circle at bottom right, rgba(255,0,0,0.15), transparent 40%);
+      pointer-events:none;
+    }
+
+    .container{
+      position:relative;
+      width:100%;
+      height:100vh;
+      padding:40px;
+    }
+
+    .title{
+      text-align:center;
+      margin-top:10px;
+    }
+
+    .title h1{
+      font-size:3rem;
+      color:#ffd700;
+      letter-spacing:3px;
+      text-shadow:0 0 15px rgba(255,215,0,0.7);
+    }
+
+    .title p{
+      margin-top:10px;
+      color:#f5f5f5;
+      font-size:1rem;
+      letter-spacing:1px;
+    }
+
+    /* PETA */
+    .map{
+      position:relative;
+      width:100%;
+      height:80vh;
+      margin-top:20px;
+    }
+
+    .location{
+      position:absolute;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .location span{
+      font-size:1.4rem;
+      font-weight:bold;
+      color:#fff;
+      background:rgba(255,215,0,0.15);
+      padding:10px 18px;
+      border:2px solid rgba(255,215,0,0.5);
+      border-radius:30px;
+      backdrop-filter:blur(4px);
+      transition:0.4s;
+      display:inline-block;
+    }
+
+    .location:hover span,
+    .location:active span{
+      transform:scale(1.1);
+      background:#ffd700;
+      color:#7a0000;
+      box-shadow:0 0 25px gold;
+    }
+
+    /* KARTU RAHASIA */
+    .card{
+      position:absolute;
+      width:280px;
+      background:rgba(255,255,255,0.12);
+      border:2px solid rgba(255,255,255,0.2);
+      backdrop-filter:blur(10px);
+      border-radius:20px;
+      overflow:hidden;
+      opacity:0;
+      visibility:hidden;
+      transform:translateY(20px) scale(0.9);
+      transition:0.5s ease;
+      box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .location:hover .card,
+    .location:active .card{
+      opacity:1;
+      visibility:visible;
+      transform:translateY(0) scale(1);
+    }
+
+    .card img{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+    }
+
+    .card-content{
+      padding:15px;
+    }
+
+    .card-content h2{
+      color:#ffd700;
+      margin-bottom:8px;
+    }
+
+    .card-content p{
+      font-size:0.92rem;
+      line-height:1.5;
+      color:#f3f3f3;
+    }
+
+    /* POSISI LOKASI */
+    .seruni{
+      top:20%;
+      left:18%;
+    }
+
+    .seruni .card{
+      top:60px;
+      left:0;
+    }
+
+    .eremerasa{
+      top:48%;
+      left:52%;
+    }
+
+    .eremerasa .card{
+      top:-20px;
+      left:120px;
+    }
+
+    .loka{
+      top:72%;
+      left:30%;
+    }
+
+    .loka .card{
+      top:-220px;
+      left:40px;
+    }
+
+    /* ORNAMEN */
+    .leaf{
+      position:absolute;
+      width:180px;
+      opacity:0.12;
+      filter:brightness(1.4);
+    }
+
+    .leaf1{
+      top:-20px;
+      left:-20px;
+      transform:rotate(-15deg);
+    }
+
+    .leaf2{
+      bottom:-30px;
+      right:-10px;
+      transform:rotate(20deg);
+    }
+
+    @media(max-width:768px){
+
+      .title h1{
+        font-size:2rem;
+      }
+
+      .location span{
+        font-size:1rem;
+      }
+
+      .card{
+        width:220px;
+      }
+
+      .card img{
+        height:130px;
+      }
+
+      .seruni .card,
+      .eremerasa .card,
+      .loka .card{
+        left:-20px;
+        top:60px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="container">
+
+  <div class="title">
+    <h1>The Bantaeng Digital Map</h1>
+    <p>Sentuh nama tempat dan rahasia Bantaeng akan terbuka ✨</p>
+  </div>
+
+  <!-- ORNAMEN -->
+  <img class="leaf leaf1" src="https://cdn-icons-png.flaticon.com/512/7656/7656740.png">
+  <img class="leaf leaf2" src="https://cdn-icons-png.flaticon.com/512/7656/7656740.png">
+
+  <div class="map">
+
+    <!-- SERUNI -->
+    <div class="location seruni">
+      <span>Seruni</span>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="card-content">
+          <h2>Seruni 🌿</h2>
+          <p>
+            Kawasan pegunungan yang terkenal dengan udara dingin,
+            pemandangan hijau, dan suasana tenang yang membuat
+            pengunjung merasa seperti memasuki negeri awan.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- EREMERASA -->
+    <div class="location eremerasa">
+      <span>Eremerasa</span>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="card-content">
+          <h2>Eremerasa 🔥</h2>
+          <p>
+            Eremerasa memiliki nuansa alam yang kuat dengan
+            budaya lokal yang masih terasa hangat. Tempat ini
+            sering dijuluki “napas hijau Bantaeng”.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOKA -->
+    <div class="location loka">
+      <span>Loka</span>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="card-content">
+          <h2>Loka ⛰️</h2>
+          <p>
+            Dikenal dengan panorama alam dan udara segar,
+            Loka menjadi salah satu wilayah yang menyimpan
+            pesona pegunungan dan keindahan khas Bantaeng.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+  </html>
